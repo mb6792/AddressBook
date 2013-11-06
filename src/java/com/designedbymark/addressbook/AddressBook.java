@@ -26,6 +26,12 @@ public class AddressBook {
 //        testFunctions();
 //    }
     
+    public static ArrayList<Contact> getContactsFromFIle() throws IOException{
+        ABFileReader fr = new ABFileReader(FILEPATH, SPLITBY);
+        fr.run(false);
+        return fr.getContacts();
+    }
+    
     public static void testContact(){
         Contact c = new Contact("Mark Bonnici", "Male", 1992,7,6);
         
