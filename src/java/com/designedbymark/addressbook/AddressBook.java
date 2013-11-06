@@ -7,6 +7,7 @@
 package com.designedbymark.addressbook;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,7 +19,8 @@ import java.util.logging.Logger;
 public class AddressBook {
     public static void main (String[] args){
 //        testContact();
-        testFileReader();
+//        testFileReader();
+        testFunctions();
     }
     
     public static void testContact(){
@@ -33,6 +35,35 @@ public class AddressBook {
         try {
             ABFileReader fr = new ABFileReader("C:/Users/Mark/Desktop/address-book-master/AddressBook", ",");
             fr.run(true);
+        } catch (IOException ex) {
+            System.out.println("ERROR: " + ex);
+            Logger.getLogger(AddressBook.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void testFunctions(){
+        try {
+            ABFileReader fr = new ABFileReader("C:/Users/Mark/Desktop/address-book-master/AddressBook", ",");
+            fr.run(true);
+            ArrayList<Contact>contactList = fr.getContacts();
+            
+            System.out.println("");
+            System.out.println("");
+            
+            Functions functions = new Functions();
+            
+            int males = functions.getMales(contactList);
+            System.out.println("Number of Males: " + males);
+            
+            System.out.println("");
+            
+            Contact oldest = functions.getOldest(contactList);
+            System.out.println("Oldest:");
+            System.out.println("Fullname: " + oldest.getFullName());
+            System.out.println("Gender: " + oldest.getGender());
+            System.out.println("DOB: " + oldest.getDOBString());
+            
+            System.out.println("");
         } catch (IOException ex) {
             System.out.println("ERROR: " + ex);
             Logger.getLogger(AddressBook.class.getName()).log(Level.SEVERE, null, ex);
