@@ -17,11 +17,14 @@ import java.util.logging.Logger;
  * @author Mark
  */
 public class AddressBook {
-    public static void main (String[] args){
+    private static String FILEPATH = "C:/Users/Mark/Desktop/address-book-master/AddressBook";
+    private static String SPLITBY = ",";
+    
+//    public static void main (String[] args){
 //        testContact();
 //        testFileReader();
-        testFunctions();
-    }
+//        testFunctions();
+//    }
     
     public static void testContact(){
         Contact c = new Contact("Mark Bonnici", "Male", 1992,7,6);
@@ -33,7 +36,7 @@ public class AddressBook {
     
     public static void testFileReader(){
         try {
-            ABFileReader fr = new ABFileReader("C:/Users/Mark/Desktop/address-book-master/AddressBook", ",");
+            ABFileReader fr = new ABFileReader(FILEPATH, SPLITBY);
             fr.run(true);
         } catch (IOException ex) {
             System.out.println("ERROR: " + ex);
@@ -43,7 +46,7 @@ public class AddressBook {
     
     public static void testFunctions(){
         try {
-            ABFileReader fr = new ABFileReader("C:/Users/Mark/Desktop/address-book-master/AddressBook", ",");
+            ABFileReader fr = new ABFileReader(FILEPATH, SPLITBY);
             fr.run(true);
             ArrayList<Contact>contactList = fr.getContacts();
             
@@ -64,6 +67,9 @@ public class AddressBook {
             System.out.println("DOB: " + oldest.getDOBString());
             
             System.out.println("");
+            
+            Long dayDif = functions.getDayDifference(contactList.get(1), contactList.get(0));
+            System.out.println("Day Difference: " + dayDif);
         } catch (IOException ex) {
             System.out.println("ERROR: " + ex);
             Logger.getLogger(AddressBook.class.getName()).log(Level.SEVERE, null, ex);
