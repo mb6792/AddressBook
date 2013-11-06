@@ -57,6 +57,14 @@ public class Contact {
         this.dob = dob;
     }
     
+    public void setDOB(String dob){
+        String[] dobString = dob.split("/");
+        int date = Integer.parseInt(dobString[0].trim());
+        int month = Integer.parseInt(dobString[1].trim());
+        int year = Integer.parseInt(dobString[2].trim());
+        setDOB(year, month, date);
+    }
+    
     public void setDOB(int year, int month, int day){
         GregorianCalendar tempDOB = new GregorianCalendar(year, month-1, day);
         this.dob = tempDOB;
